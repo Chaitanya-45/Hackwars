@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { Grid, TextField, Button, Typography, Paper } from '@material-ui/core';
-import { auth } from '../firebase/firebase';
+import { auth,googleProvider } from '../firebase/firebase';
 import { Navigate } from 'react-router-dom'; 
 
 const useStyles = makeStyles((theme) => ({
@@ -10,6 +10,7 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: 'center',
     alignItems: 'center',
     minHeight: '100vh',
+    color: 'white',
   },
   paper: {
     padding: theme.spacing(4),
@@ -25,7 +26,37 @@ const useStyles = makeStyles((theme) => ({
     width: '100%',
   },
   button: {
+    color: 'white',
     marginTop: theme.spacing(2),
+  },
+  googleButton: {
+    marginTop: theme.spacing(2),
+    color: 'white',
+    backgroundColor: '#4285F4', // Google blue color
+    '&:hover': {
+      backgroundColor: '#357AE8',
+    },
+    display: 'flex',
+    alignItems: 'center',
+    paddingLeft: theme.spacing(7),
+    borderRadius: theme.spacing(1),
+    position: 'relative',
+    overflow: 'hidden',
+  },
+  googleButtonText: {
+    color: 'white',
+    fontWeight: 'bold',
+    fontSize: '16px',
+    paddingLeft: theme.spacing(0),
+  },
+  googleIcon: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    height: '100%',
+    width: 'auto',
+    padding: theme.spacing(0.5), 
+    objectFit: 'contain',
   },
 }));
 
@@ -58,6 +89,14 @@ const Login = () => {
       setEmail('');
       setPassword('');
       setError('');
+    } catch (error) {
+      setError(error.message);
+    }
+  };
+  const handleGoogleLogin = async () => {
+    try {
+      await auth.signInWithPopup(googleProvider);
+      setIsLoggedIn(true);
     } catch (error) {
       setError(error.message);
     }
@@ -109,6 +148,21 @@ const Login = () => {
                 onClick={handleLoginClick} 
               >
                 Login
+              </Button>
+              <Button
+                variant="contained"
+                className={classes.googleButton}
+                fullWidth
+                onClick={handleGoogleLogin}
+              >
+                <img
+                  src="https://developers.google.com/identity/images/g-logo.png"
+                  alt="Google logo"
+                  className={classes.googleIcon}
+                />
+                <Typography className={classes.googleButtonText}>
+                  Sign in with Google
+                </Typography>
               </Button>
             </form>
           </Paper>

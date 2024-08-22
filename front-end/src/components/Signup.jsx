@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { Grid, TextField, Button, Typography, Paper, FormControlLabel, Checkbox } from '@material-ui/core';
-import { auth, database} from '../firebase/firebase';
+import { auth, database, googleProvider} from '../firebase/firebase';
 import { Navigate } from 'react-router-dom'; 
 
 const useStyles = makeStyles((theme) => ({
@@ -84,6 +84,24 @@ const Signup = () => {
       console.log('User signed up and data saved:', email, username, phoneNumber);
 
       
+      setRedirectToLogin(true);
+    } catch (error) {
+      setError(error.message);
+    }
+  };
+
+  const signupWithGoogle = async () => {
+    try {
+      const result = await auth.signInWithPopup(googleProvider);
+      const user = result.user;
+
+      await database.ref('users/' + user.uid).set({
+        username: user.displayName,
+        email: user.email,
+        phoneNumber: user.phoneNumber,
+      });
+
+      setSuccessMessage('Successfully signed in with Google!');
       setRedirectToLogin(true);
     } catch (error) {
       setError(error.message);
@@ -180,6 +198,16 @@ const Signup = () => {
                 onClick={handleSignUp}
               >
                 Sign Up
+              </Button>
+              <br />
+              <Button
+                variant="contained"
+                color="secondary"
+                fullWidth
+                className={classes.button}
+                onClick={signupWithGoogle}
+              >
+                Sign Up with Google
               </Button>
             </form>
           </Paper>
