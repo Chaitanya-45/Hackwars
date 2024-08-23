@@ -27,7 +27,7 @@ SvasthMaitri is a web-based platform developed to streamline the process of dona
 
 1. Clone the repository:
    ```
-   git clone https://github.com/your-username/svasthmaitri.git
+   git clone https://github.com/your-username/Hackwars.git
    ```
 2. Navigate to the project directory:
    ```
@@ -57,7 +57,7 @@ SvasthMaitri is a web-based platform developed to streamline the process of dona
 
 ## Technologies Used
 
-- **Frontend**: React.js, HTML, CSS
+- **Frontend**: React.js, Material ui
 - **Backend**: Node.js, Express.js
 - **Database**: Firebase Realtime Database
 - **Other Tools**: CORS middleware, Firebase Admin SDK
