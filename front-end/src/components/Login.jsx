@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import { Grid, TextField, Button, Typography, Paper } from '@material-ui/core';
+import { styled } from '@mui/system';
+import { Grid, TextField, Button, Typography, Paper } from '@mui/material';
 import { auth,googleProvider } from '../firebase/firebase';
 import { Navigate } from 'react-router-dom'; 
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = styled((theme) => ({
   root: {
     display: 'flex',
     justifyContent: 'center',
@@ -32,7 +32,7 @@ const useStyles = makeStyles((theme) => ({
   googleButton: {
     marginTop: theme.spacing(2),
     color: 'white',
-    backgroundColor: '#4285F4', // Google blue color
+    backgroundColor: '#4285F4', 
     '&:hover': {
       backgroundColor: '#357AE8',
     },

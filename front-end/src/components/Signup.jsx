@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import { Grid, TextField, Button, Typography, Paper, FormControlLabel, Checkbox } from '@material-ui/core';
-import { auth, database, googleProvider} from '../firebase/firebase';
+import { styled } from '@mui/system';
+import { Grid, TextField, Button, Typography, Paper, FormControlLabel, Checkbox } from '@mui/material';
+import { auth, database, googleProvider } from '../firebase/firebase';
 import { Navigate } from 'react-router-dom'; 
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = styled((theme) => ({
   root: {
     display: 'flex',
     justifyContent: 'center',

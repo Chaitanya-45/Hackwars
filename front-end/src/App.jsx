@@ -19,6 +19,7 @@ import Donate from "./components/Donate";
 import CommunityPage from "./components/CommunityPage";
 import { auth } from "./firebase/firebase";
 import ImpMedicineDon from "./components/ImpMedicineDon";
+import Questionnaire from "./components/Questionnaire";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -72,6 +73,7 @@ function App() {
               <Route path="/Donations" element={<Donations/>} />
               <Route path="/Articlespage" element={<Articlespage />} />
               <Route path="/CommunityPage" element={<CommunityPage />} /> 
+              <Route path="/Questionnaire" element={<Questionnaire />} />
               <Route path="/Donate" element={<Donate />} />
               <Route path="/ImpMedicineDon" element={<ImpMedicineDon />} />
             </>

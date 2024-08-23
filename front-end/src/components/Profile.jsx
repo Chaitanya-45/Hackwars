@@ -1,24 +1,28 @@
 import React, { useEffect, useState } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import { Typography, Paper } from '@material-ui/core';
+import { styled } from '@mui/system';
+import { Typography, Paper } from '@mui/material';
 import { auth, database} from '../firebase/firebase';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = styled((theme) => ({
   root: {
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
     minHeight: '100vh',
+    backgroundColor: theme.palette.background.default, 
   },
   paper: {
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
     padding: theme.spacing(4),
-    marginLeft: theme.spacing(10),
     borderRadius: theme.spacing(2),
-    marginBottom: theme.spacing(10),
-    marginTop: theme.spacing(10),
     boxShadow: theme.shadows[3],
     backgroundColor: theme.palette.background.paper,
     maxWidth: 500,
+    width: '100%', 
+    textAlign: 'center', 
   },
 }));
 
@@ -57,9 +61,11 @@ const Profile = () => {
   return (
     <div className={classes.root}>
       <Paper className={classes.paper}>
-        {userData ? (
+        {error ? (
+          <Typography variant="body2" color="error">{error}</Typography>
+        ) : userData ? (
           <>
-            <Typography variant="h4" align="center" gutterBottom>
+            <Typography variant="h4" gutterBottom>
               Profile
             </Typography>
             <Typography variant="body1">Username: {userData.username}</Typography>
@@ -67,7 +73,7 @@ const Profile = () => {
             <Typography variant="body1">Phone Number: {userData.phoneNumber}</Typography>
           </>
         ) : (
-          <Typography variant="body1" align="center">Loading...</Typography>
+          <Typography variant="body1">Loading...</Typography>
         )}
       </Paper>
     </div>
